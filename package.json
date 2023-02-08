@@ -4,8 +4,8 @@
   "description": "༼ つ ◕_◕ ༽つ",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "format": "prettier --write src/*.js"
+    "start": "node index.js",
+    "format": "prettier --write *.js"
   },
   "repository": {
     "type": "git",
