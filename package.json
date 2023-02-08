@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/noppakornn/NodeREST#readme",
   "devDependencies": {
+    "nodemon": "^2.0.20",
     "prettier": "^2.8.3"
   },
   "dependencies": {
