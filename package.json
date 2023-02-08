@@ -4,8 +4,8 @@
   "description": "༼ つ ◕_◕ ༽つ",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "format": "prettier --write src/*.js"
+    "start": "nodemon src/CRUDBookNoDB.js",
+    "format": "prettier --write src/CRUDBookNoDB.js"
   },
   "repository": {
     "type": "git",
