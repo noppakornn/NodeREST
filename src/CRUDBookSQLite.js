@@ -34,7 +34,7 @@ app.get('/books', (req, res) => {
 
 // route to get a book by id
 app.get('/books/:id', (req, res) => {
-    db.get(`SELECT * FROM books WHERE id = ?`, req.params.id, (err, row) => {
+    db.get('SELECT * FROM books WHERE id = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
