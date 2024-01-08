@@ -16,7 +16,7 @@ app.use(express.json());
 
 // create books table if it doesn't exist
 db.run(`CREATE TABLE IF NOT EXISTS books (
-    id INTEGER PRIMANY KEY,
+    id INTEGER PRIMARY KEY,
     title TEXT,
     author TEXT
 )`);
@@ -34,7 +34,7 @@ app.get('/books', (req, res) => {
 
 // route to get a book by id
 app.get('/books/:id', (req, res) => {
-    db.get('SELECT * FROM books WHERE id = ?', req.params.id, (err, row) => {
+    db.get(`SELECT * FROM books WHERE id = ?`, req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -61,7 +61,7 @@ app.post('/books', (req, res) => {
 });
 
 // route to update a book
-app.put('/book/:id', (req, res) => {
+app.put('/books/:id', (req, res) => {
     const book = req.body;
     db.run('UPDATE books SET title = ?, author = ? WHERE id = ?', book.title, book.author, req.params.id, function(err) {
         if (err) {
