@@ -1,15 +1,23 @@
+// Description: Node Express REST API with Sequelize and SQLite CRUD Book
+// npm install express sequelize sqlite3
+// Run this file withh node SeqlizeSQLiteCRUDBook.js
+// Test with Postman
+
 const express = require('express');
 const Sequelize = require('sequelize');
 const app = express();
 
+// parse incoming requests
 app.use(express.json());
 
+// create a connection to the database
 const sequelize = new Sequelize('database', 'username', 'password', {
     host: 'localhost',
     dialect: 'sqlite',
     storage: './Database/SQBooks.sqlite'
 });
 
+// define the Book model
 const Book = sequelize.define('book', {
     id: {
         type: Sequelize.INTEGER,
@@ -26,8 +34,10 @@ const Book = sequelize.define('book', {
     }
 });
 
+// create the books table if it doesn't exist
 sequelize.sync();
 
+// route to get all books
 app.get('/books', (req, res) => {
     Book.findAll().then(books => {
         res.json(books);
@@ -36,6 +46,7 @@ app.get('/books', (req, res) => {
     });
 });
 
+// route to get a book by id
 app.get('/books/:id', (req, res) => {
     Book.findByPk(req.params.id).then(book => {
         if (!book) {
@@ -48,6 +59,7 @@ app.get('/books/:id', (req, res) => {
     });
 });
 
+// route to create a new book
 app.post('/books', (req, res) => {
     Book.create(req.body).then(book => {
         res.send(book);
@@ -56,6 +68,7 @@ app.post('/books', (req, res) => {
     });
 });
 
+// route to update a book
 app.put('/books/:id', (req, res) => {
     Book.findByPk(req.params.id).then(book => {
         if (!book) {
@@ -72,6 +85,7 @@ app.put('/books/:id', (req, res) => {
     });
 });
 
+// route to delete a book
 app.delete('/books/:id', (req, res) => {
     Book.findByPk(req.params.id).then(book => {
         if (!book) {
@@ -88,5 +102,6 @@ app.delete('/books/:id', (req, res) => {
     });
 });
 
+// start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
